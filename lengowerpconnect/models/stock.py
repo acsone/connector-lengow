@@ -74,7 +74,8 @@ class LengowPickingExporter(Exporter):
             picking.carrier_id.lengow_value or False)
 
         adapter.process_request(requests.post, api_url,
-                                params=tracking_params)
+                                params=tracking_params,
+                                ignore_result=True)
 
 
 @on_picking_out_done

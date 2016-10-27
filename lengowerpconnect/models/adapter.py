@@ -55,14 +55,16 @@ class LengowCRUDAdapter20(CRUDAdapter):
         super(LengowCRUDAdapter20, self).__init__(connector_env)
 
     def process_request(self, http_request, url, headers={}, params={},
-                        data={}):
+                        data={}, ignore_result=False):
         response = http_request(url, headers=headers, params=params, data=data)
         if response.status_code != 200:
             error = response.json()
             message = '%s - %s' % (error['error']['code'],
                                    error['error']['message'])
             raise Exception(message)
-        return response.json()
+        if not ignore_result:
+            return response.json()
+        return True
 
     def _call(self, url):
         url = '%s/%s' % (self.backend_record.location, url)
