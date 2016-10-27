@@ -83,7 +83,7 @@ class LengowImporter(Importer):
         hashtring = ''.join(discriminant_values.values())
         if not hashtring:
             return False
-        hash_object = hashlib.sha1(hashtring.encode())
+        hash_object = hashlib.sha1(hashtring.encode('utf8'))
         return hash_object.hexdigest()
 
     def _before_import(self):
